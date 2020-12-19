@@ -1,7 +1,6 @@
 export default {
   name: "portfolio",
   title: "Portfolio",
-  icon: AiFillFolderOpen,
   type: "document",
   fields: [
     {
@@ -15,10 +14,10 @@ export default {
       type: "text",
     },
     {
-      name: "projects",
-      title: "Projects",
+      name: "images",
+      title: "Images",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "project" }] }],
+      of: [{ type: "image" }],
     },
   ],
 };

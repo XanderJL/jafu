@@ -13,6 +13,7 @@ const Layout = ({ title, children }) => {
       <Flex direction="column" minH="calc(100vh - 4rem)" minW="100%">
         <Navbar>
           <NavbarItem href="/">HOME</NavbarItem>
+          <NavbarItem href="/discography">DISCOGRAPHY</NavbarItem>
           <NavbarItem href="/portfolio">PORTFOLIO</NavbarItem>
           <NavbarItem href="/contact">CONTACT</NavbarItem>
         </Navbar>
