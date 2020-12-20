@@ -9,9 +9,6 @@ const Contact = () => {
     <Layout title="Contact">
       <Box minH="calc(100vh - 4rem)" bg="gray.800">
         <Container>
-          <Heading w="100%" fontSize="5xl" color="purple.50">
-            Contact Me
-          </Heading>
           <ContactForm
             minW={[
               "calc(375px - 2.5rem)",

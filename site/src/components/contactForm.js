@@ -1,9 +1,9 @@
 /** @jsx jsx */
 
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { css, jsx } from "@emotion/core"
-import { theme, Flex, Box } from "@chakra-ui/core"
+import { theme, Flex, Box, Heading } from "@chakra-ui/core"
 
 const formStyles = css`
   display: flex;
@@ -47,43 +47,77 @@ const formStyles = css`
   }
 `
 
+const encode = data => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&")
+}
+
 const ContactForm = ({ ...props }) => {
-  const { register, errors, handleSubmit } = useForm()
+  const { register, errors, handleSubmit, reset } = useForm()
+  const [submission, setSubmission] = useState(false)
 
   const onSubmit = data => {
-    console.log(data)
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...data }),
+    })
+      .then(() => {
+        reset()
+        setSubmission(true)
+      })
+      .catch(error => alert(error))
   }
 
   return (
     <Box {...props}>
-      <form css={formStyles} onSubmit={handleSubmit(onSubmit)}>
-        <Flex direction={["column", "row"]} justify="space-between">
-          <Flex w={["100%", "calc(50% - 12px)"]} direction="column">
-            <label>First Name</label>
-            <input name="firstName" ref={register({ required: true })} />
-            {errors.firstName && <p>Your first name is required</p>}
-          </Flex>
-          <Flex w={["100%", "calc(50% - 12px)"]} direction="column">
-            <label>Last Name</label>
-            <input name="lastName" ref={register({ required: true })} />
-            {errors.lastName && <p>Your last name is required</p>}
-          </Flex>
-        </Flex>
-        <label>Email Address</label>
-        <input name="email" ref={register({ required: true })} />
-        {errors.email && <p>Your email address is required</p>}
-        <label>Message</label>
-        <textarea
-          name="message"
-          ref={register({ required: true, minLength: 2 })}
-          rows={8}
-        />
-        {errors.message?.type === "required" && <p>A message is required</p>}
-        {errors.message?.type === "minLength" && (
-          <p>Your message must be more than 2 characters long</p>
-        )}
-        <input className="button" type="submit" />
-      </form>
+      {!submission ? (
+        <>
+          <Heading w="100%" fontSize="5xl" color="purple.50">
+            Contact Me
+          </Heading>
+          <form
+            name="contact"
+            css={formStyles}
+            onSubmit={handleSubmit(onSubmit)}
+            data-netlify="true"
+          >
+            <Flex direction={["column", "row"]} justify="space-between">
+              <Flex w={["100%", "calc(50% - 12px)"]} direction="column">
+                <label>First Name</label>
+                <input name="firstName" ref={register({ required: true })} />
+                {errors.firstName && <p>Your first name is required</p>}
+              </Flex>
+              <Flex w={["100%", "calc(50% - 12px)"]} direction="column">
+                <label>Last Name</label>
+                <input name="lastName" ref={register({ required: true })} />
+                {errors.lastName && <p>Your last name is required</p>}
+              </Flex>
+            </Flex>
+            <label>Email Address</label>
+            <input name="email" ref={register({ required: true })} />
+            {errors.email && <p>Your email address is required</p>}
+            <label>Message</label>
+            <textarea
+              name="message"
+              ref={register({ required: true, minLength: 2 })}
+              rows={8}
+            />
+            {errors.message?.type === "required" && (
+              <p>A message is required</p>
+            )}
+            {errors.message?.type === "minLength" && (
+              <p>Your message must be more than 2 characters long</p>
+            )}
+            <input className="button" type="submit" />
+          </form>
+        </>
+      ) : (
+        <Heading as="h1" fontSizes="5xl" color="purple.50">
+          Thank you for reaching out. I'll get in touch as soon as I can.
+        </Heading>
+      )}
     </Box>
   )
 }
