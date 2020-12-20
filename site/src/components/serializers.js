@@ -1,5 +1,6 @@
 import React from "react"
 import { Heading, Link, Text } from "@chakra-ui/core"
+import SanityImage from "./sanityImage"
 
 const serializers = {
   types: {
@@ -20,6 +21,9 @@ const serializers = {
       }
 
       return <Text fontSize="xl">{props.children}</Text>
+    },
+    image: props => {
+      return <SanityImage src={props.node.asset._ref} />
     },
   },
   marks: {
