@@ -40,8 +40,8 @@ export default {
   },
   breakpoints: ["30em", "48em", "62em", "80em"],
   fonts: {
-    heading: '"Avenir Next", sans-serif',
-    body: "system-ui, sans-serif",
+    heading: '"Noto Sans JP", sans-serif',
+    body: "Noto Sans JP, sans-serif",
     mono: "Menlo, monospace",
   },
   fontSizes: {

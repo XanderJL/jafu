@@ -14,7 +14,7 @@ const Layout = ({ title, children }) => {
         <Navbar>
           <NavbarItem href="/">HOME</NavbarItem>
           <NavbarItem href="/discography">DISCOGRAPHY</NavbarItem>
-          <NavbarItem href="/portfolio">PORTFOLIO</NavbarItem>
+          <NavbarItem href="/photos">PHOTOS</NavbarItem>
           <NavbarItem href="/contact">CONTACT</NavbarItem>
         </Navbar>
         <Box flex={1}>{children}</Box>
