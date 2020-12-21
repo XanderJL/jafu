@@ -58,7 +58,9 @@ const Portfolio = () => {
                         alt={artAlt}
                       />
                     </Box>
-                    <AudioPlayer src={media.asset.url.toString()} />
+                    {media?.asset?.url && (
+                      <AudioPlayer src={media.asset.url.toString()} />
+                    )}
                   </Flex>
                   <Flex direction="column">
                     <Heading color="purple.50" mb={[".5rem", "1rem"]}>

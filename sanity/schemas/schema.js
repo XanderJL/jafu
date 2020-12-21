@@ -6,6 +6,7 @@ import landingPage from "./landingPage";
 import discography from "./discography";
 import portfolio from "./portfolio";
 import project from "./project";
+import iframe from "./iframe";
 
 export default createSchema({
   name: "default",
@@ -15,5 +16,6 @@ export default createSchema({
     project,
     portfolio,
     discography,
+    iframe,
   ]),
 });

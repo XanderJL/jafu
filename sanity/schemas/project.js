@@ -34,7 +34,7 @@ export default {
       name: "notes",
       title: "Notes",
       type: "array",
-      of: [{ type: "block" }],
+      of: [{ type: "block" }, { type: "image" }, { type: "iframe" }],
     },
   ],
 };

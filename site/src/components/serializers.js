@@ -1,6 +1,7 @@
 import React from "react"
 import { Heading, Link, Text } from "@chakra-ui/core"
 import SanityImage from "./sanityImage"
+import Iframe from "react-iframe"
 
 const serializers = {
   types: {
@@ -24,6 +25,9 @@ const serializers = {
     },
     image: props => {
       return <SanityImage src={props.node.asset._ref} />
+    },
+    iframe: props => {
+      return <Iframe url={props.node.url} height="120px" width="100%" />
     },
   },
   marks: {
